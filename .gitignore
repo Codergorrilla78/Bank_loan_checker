@@ -1,0 +1,24 @@
+# Python Virtual Environment
+venv/
+env/
+.env
+
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Node.js / Vite
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# System/IDE
+.DS_Store
+.vscode/
+.idea/
+
+# We DO NOT ignore the .xgb model JSON here because we want to commit it, 
+# so PaaS instances use the pretrained valid dataset immediately.

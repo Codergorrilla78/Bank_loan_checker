@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>NeoBank | AI Loan Checker</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <div class="glow-blob blob-1"></div>
+    <div class="glow-blob blob-2"></div>
+    
+    <div class="app-container">
+      <header>
+        <div class="logo">NeoBank.</div>
+        <p>AI-Powered Automated Loan Intelligence</p>
+      </header>
+      
+      <main class="glass-panel">
+        <form id="loan-form">
+          <h2>Application Details</h2>
+          <div class="input-grid">
+            <div class="input-group">
+              <input type="number" id="age" required placeholder=" " min="18" max="100">
+              <label for="age">Age</label>
+            </div>
+            <div class="input-group">
+              <input type="number" id="income" required placeholder=" " min="0">
+              <label for="income">Annual Income ($)</label>
+            </div>
+            <div class="input-group">
+              <input type="number" id="loanAmount" required placeholder=" " min="100">
+              <label for="loanAmount">Loan Amount ($)</label>
+            </div>
+            <div class="input-group">
+              <input type="number" id="creditScore" required placeholder=" " min="300" max="850">
+              <label for="creditScore">Credit Score</label>
+            </div>
+            <div class="input-group full-width">
+              <input type="number" id="employmentYears" required placeholder=" " min="0" max="80" step="1">
+              <label for="employmentYears">Employment History (Years)</label>
+            </div>
+          </div>
+          
+          <button type="submit" class="submit-btn" id="submitBtn">
+            <span class="btn-text">Check Eligibility</span>
+            <span class="loader hidden"></span>
+          </button>
+        </form>
+
+        <div id="result-overlay" class="result-overlay hidden">
+          <div class="result-card">
+            <button id="closeResult" class="close-btn">&times;</button>
+            <div class="status-icon" id="statusIcon"></div>
+            <h3 id="resultTitle">Analyzing...</h3>
+            <div class="score-bars">
+              <div class="score-bar-container">
+                <span class="score-label">Approval Confidence</span>
+                <div class="progress-track"><div id="approveBar" class="progress-fill approve-fill"></div></div>
+                <span class="score-value" id="approveValue">0%</span>
+              </div>
+              <div class="score-bar-container">
+                <span class="score-label">Risk Check</span>
+                <div class="progress-track"><div id="rejectBar" class="progress-fill reject-fill"></div></div>
+                <span class="score-value" id="rejectValue">0%</span>
+              </div>
+            </div>
+            <p id="resultMessage" class="result-message"></p>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
