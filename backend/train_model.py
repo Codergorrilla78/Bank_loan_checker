@@ -7,10 +7,10 @@ import os
 
 def create_synthetic_data(num_samples=2000):
     np.random.seed(42)
-    # Generate random features
+    # Generate random features (scale up to real world mortgages/loans)
     age = np.random.randint(21, 65, num_samples)
-    income = np.random.randint(30000, 150000, num_samples)
-    loan_amount = np.random.randint(1000, 50000, num_samples)
+    income = np.random.randint(40000, 250000, num_samples)
+    loan_amount = np.random.randint(5000, 500000, num_samples)
     credit_score = np.random.randint(300, 850, num_samples)
     employment_years = np.random.randint(0, 40, num_samples)
     
@@ -22,21 +22,21 @@ def create_synthetic_data(num_samples=2000):
         'EmploymentYears': employment_years
     })
     
-    # Calculate a simplified risk score
-    # Lower income, higher loan amount, lower credit score -> higher risk (closer to 1)
+    # Calculate a simplified risk score using DTI (Debt-to-Income)
+    dti_ratio = df['LoanAmount'] / (df['Income'] + 1)
+    
     risk_score = (
-        ((50000 / df['Income']) * 0.4) + 
-        ((df['LoanAmount'] / 20000) * 0.3) + 
-        ((700 / df['CreditScore']) * 0.4) - 
+        (dti_ratio * 0.25) + 
+        ((720 / df['CreditScore']) * 0.6) - 
         (df['EmploymentYears'] * 0.01)
     )
     
     # Add some noise
-    risk_score += np.random.normal(0, 0.2, num_samples)
+    risk_score += np.random.normal(0, 0.15, num_samples)
     
     # 1 is Default (Reject), 0 is Good (Approve)
-    # Let's say if risk_score > 1.2, they default.
-    df['Default'] = (risk_score > 1.2).astype(int)
+    # If risk_score > 1.3, they default.
+    df['Default'] = (risk_score > 1.3).astype(int)
     
     return df
 
