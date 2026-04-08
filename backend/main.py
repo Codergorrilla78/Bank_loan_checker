@@ -39,9 +39,6 @@ class LoanApplication(BaseModel):
     CreditScore: int
     EmploymentYears: int
 
-frontend_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'frontend'))
-app.mount("/", StaticFiles(directory=frontend_path, html=True), name="frontend")
-
 @app.post("/predict")
 def predict_loan(application: LoanApplication):
     if not MODEL_LOADED:
@@ -68,3 +65,6 @@ def predict_loan(application: LoanApplication):
         "confidence_approve": round(prob_approve * 100, 2),
         "confidence_reject": round(prob_reject * 100, 2)
     }
+
+frontend_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'frontend'))
+app.mount("/", StaticFiles(directory=frontend_path, html=True), name="frontend")
